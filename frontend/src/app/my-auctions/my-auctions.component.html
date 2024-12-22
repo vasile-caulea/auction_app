@@ -1,0 +1,27 @@
+<mat-sidenav-container autosize>
+  <mat-sidenav mode="side" opened class="sidenav" >
+    <button mat-button (click)="setActiveSection(Sections.MyAuctions)"
+            [class.active]="isSectionActive(Sections.MyAuctions)">
+      My Auctions
+    </button>
+    <button mat-button (click)="setActiveSection(Sections.MyBids)"
+            [class.active]="isSectionActive(Sections.MyBids)">
+      My Bids
+    </button>
+    <button mat-button (click)="setActiveSection(Sections.AddAuction)"
+            [class.active]="isSectionActive(Sections.AddAuction)">
+      Add Auction
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-container *ngIf="isSectionActive(Sections.MyAuctions)">
+      <app-auction-list [auctions]="auctions"></app-auction-list>
+    </ng-container>
+    <ng-container *ngIf="isSectionActive(Sections.MyBids)">
+      <p>Here are the auctions you have bidded on.</p>
+    </ng-container>
+    <ng-container *ngIf="isSectionActive(Sections.AddAuction)">
+      <p>Here must be content for creating auction</p>
+    </ng-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

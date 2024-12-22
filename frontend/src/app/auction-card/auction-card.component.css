@@ -1,0 +1,17 @@
+
+mat-card.auction-card {
+  max-width: 350px;
+  margin: 1em;
+}
+
+.auction-card mat-card-content {
+  padding: 10px;
+}
+
+.auction-card-img {
+  object-fit: cover;
+}
+
+.auction-card-avatar {
+  object-fit: cover;
+}

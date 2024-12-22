@@ -1,0 +1,18 @@
+<mat-card class="auction-card">
+  <mat-card-header>
+    <img mat-card-avatar alt=""
+         [ngSrc]="userAvatar || '/default-avatar.png'"
+         [width]="auctionCardAvatarW" [height]="auctionCardAvatarH"/>
+    <mat-card-title>{{ userName }}</mat-card-title>
+    <mat-card-subtitle>{{ getFormattedDate() }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <img class="auction-card-img" mat-card-image [ngSrc]="imgSrc" [width]="auctionCardImgW" [height]="auctionCardImgH"
+       alt="Photo of a Shiba Inu"/>
+  <mat-card-content>
+    <p>{{ description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button [routerLink]="['/auction', auctionID]">See more..</button>
+  </mat-card-actions>
+</mat-card>

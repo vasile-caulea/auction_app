@@ -1,0 +1,20 @@
+<nav id="menu">
+  <div class="logo">
+    <a href="#" class="logo-text">
+      CHARITY AUCTIONS
+    </a>
+    <mat-icon class="logo-icon">volunteer_activism</mat-icon>
+  </div>
+  <mat-nav-list>
+    <a class="menu-link" mat-list-item [routerLink]="link.route" *ngFor="let link of links">{{ link.name }}</a>
+
+    <a *ngIf="!isLoggedIn" class="menu-link-icon" mat-list-item [routerLink]="'sign-in'">
+      <mat-icon class="login" inline="true">login</mat-icon>
+    </a>
+
+    <a *ngIf="isLoggedIn" class="menu-link-icon" mat-list-item [routerLink]="'profile'">
+      <mat-icon class="account" inline="true">account_circle</mat-icon>
+    </a>
+  </mat-nav-list>
+</nav>
+

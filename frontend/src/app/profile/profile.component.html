@@ -1,0 +1,69 @@
+<!--<div>-->
+<!--  <mat-card class="user-info">-->
+<!--    <mat-card-content class="user-info-content">-->
+<!--      <img mat-card-image class="user-info-img" [ngSrc]="user.avatarUrl" alt="User Avatar" width="300" height="300">-->
+<!--      <h2>{{ user.name }}</h2>-->
+<!--      <p><strong>Email:</strong> {{ user.email }}</p>-->
+<!--    </mat-card-content>-->
+<!--    <mat-card-actions>-->
+<!--      <button mat-raised-button color="primary">-->
+<!--        {{ isEditing ? 'Close Edit' : 'Edit Profile' }}-->
+<!--      </button>-->
+<!--    </mat-card-actions>-->
+<!--  </mat-card>-->
+
+<!--  <mat-card class="user-info">-->
+<!--    <mat-card-content>-->
+<!--      <form [formGroup]="userInfoForm">-->
+<!--        <mat-form-field>-->
+<!--          <mat-label>Name</mat-label>-->
+<!--          <input matInput>-->
+<!--        </mat-form-field>-->
+
+<!--        <mat-form-field>-->
+<!--          <mat-label>Email</mat-label>-->
+<!--          <input matInput>-->
+<!--        </mat-form-field>-->
+
+<!--        <button mat-raised-button color="accent">Save</button>-->
+<!--      </form>-->
+<!--    </mat-card-content>-->
+<!--  </mat-card>-->
+<!--</div>-->
+
+<div class="profile-container">
+  <mat-card class="user-info">
+    <mat-card-content class="user-info-content">
+      <img mat-card-image class="user-info-img" [ngSrc]="user.avatarUrl" alt="User Avatar" width="300" height="300">
+      <h2>{{ user.name }}</h2>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="toggleEdit()">
+        {{ isEditing ? 'Close Edit' : 'Edit Profile' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div class="edit-form" *ngIf="isEditing">
+    <form>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Name</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Bio</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" (click)="toggleEdit()">Save</button>
+    </form>
+  </div>
+</div>
+

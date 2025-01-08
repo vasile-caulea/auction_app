@@ -1,0 +1,18 @@
+
+mat-card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+img.auction-object-img {
+  width: 250px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

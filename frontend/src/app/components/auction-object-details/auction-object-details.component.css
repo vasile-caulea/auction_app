@@ -1,0 +1,44 @@
+.auction-object-details-content {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 0 auto;
+  padding: 30px;
+  gap: 30px;
+  justify-content: center;
+}
+
+.auction-object-details-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.auction-object-details-img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.oject-details {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+ng-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+ng-form > mat-form-field {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+}

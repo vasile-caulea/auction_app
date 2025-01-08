@@ -1,0 +1,10 @@
+<mat-card (click)=" goToDetails()">
+  <mat-card-header>
+    <img mat-card-image alt="" [src]="auctionObject.imgSrc" class="auction-object-img">
+  </mat-card-header>
+  <mat-card-content>
+    <h2>{{ auctionObject.title.toLocaleUpperCase() }}</h2>
+    <p>Start price: {{ auctionObject.price }} RON</p>
+    <p>{{ auctionObject.description }}</p>
+  </mat-card-content>
+</mat-card>

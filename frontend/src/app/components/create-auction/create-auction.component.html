@@ -1,0 +1,53 @@
+<div class="create-auction-container">
+
+  <form [formGroup]="auctionForm" class="create-auction-form">
+    <mat-form-field>
+      <mat-label>Auction Title</mat-label>
+      <input matInput type="text" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Start date</mat-label>
+      <input matInput [matDatepicker]="pickerSD" formControlName="startDate"/>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="pickerSD"></mat-datepicker-toggle>
+      <mat-datepicker #pickerSD></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>End date</mat-label>
+      <input matInput [matDatepicker]="pickerED" formControlName="endDate"/>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="pickerED"></mat-datepicker-toggle>
+      <mat-datepicker #pickerED></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="doUploadCoverPhoto($event)">Upload Cover Photo</button>
+    <input id="coverImageInput" type="file" multiple (change)="onCoverPhotoSelected($event)" hidden>
+
+    <button mat-raised-button color="primary" (click)="doUpload($event)">Upload Images</button>
+    <input id="fileInput" type="file" multiple (change)="onFileSelected($event)" hidden>
+  </form>
+
+  <div class="auction-cover-image" *ngIf="coverImage.previewUrl">
+    <img [src]="coverImage.previewUrl" alt="Cover Image" class="upload-preview">
+  </div>
+
+  <div class="auction-images">
+    <app-auction-object
+      *ngFor="let file of uploadedFiles; let i = index"
+      [uploadedFile]="file"
+      (remove)="onRemove(i)">
+    </app-auction-object>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="createAuction()">Create Auction</button>
+</div>
+
+
+

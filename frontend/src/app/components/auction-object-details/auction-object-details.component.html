@@ -1,0 +1,68 @@
+<div class="auction-object-details-content">
+
+  <div class="auction-object-details-header">
+    <img [src]="this.objectDetails.imgSrc" alt="Auction Object Image" class="auction-object-details-img">
+    <div class="oject-details">
+      <h2>{{ this.objectDetails.title }}</h2>
+      <h2 *ngIf="this.hasBids">Current bid: {{ this.currentBid.amount }}</h2>
+      <p>Starting price: {{ this.objectDetails.price }} RON</p>
+      <mat-expansion-panel *ngIf="this.objectDetails.description">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Auction Object Details
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <p>{{ this.objectDetails.description }}</p>
+        </ng-template>
+      </mat-expansion-panel>
+      <ng-form>
+        <p>Do you want to bid? Enter the price below.</p>
+        <mat-form-field [subscriptSizing]="'dynamic'">
+          <mat-label>Value</mat-label>
+          <input matInput type="number" name="bidValue" placeholder="Bid" [(ngModel)]="bidValue"
+                 [min]="this.currentBid.amount || this.objectDetails.price">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="bid()">Bid</button>
+      </ng-form>
+    </div>
+  </div>
+
+  <ng-container *ngIf="this.hasBids; else noBids">
+    <h2>Current bid: {{ this.currentBid.amount }} RON by
+      <a [routerLink]="['/profile', getCurrentBidderId()]"> {{ getCurrentBidder() }} </a>
+      at {{ getCurrentBidTime() }} </h2>
+
+    <table mat-table [dataSource]="bids" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">
+          <a
+            [routerLink]="['/profile', element.bidBy._id]"> {{ element.bidBy.firstName + " " + element.bidBy.lastName }} </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let element"> {{ element.amount }} RON</td>
+      </ng-container>
+
+      <ng-container matColumnDef="bidTime">
+        <th mat-header-cell *matHeaderCellDef>Bid time</th>
+        <td mat-cell *matCellDef="let element"> {{ element.bidTime.toLocaleString('ro-RO', {timeZone: 'EET'}) }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <canvas baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="'bar'">
+    </canvas>
+  </ng-container>
+  <ng-template #noBids>
+    <h1>No bids yet</h1>
+  </ng-template>
+
+</div>

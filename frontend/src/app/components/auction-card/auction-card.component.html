@@ -1,18 +1,23 @@
-<mat-card class="auction-card">
+<mat-card class="auction-card" (click)="goToDetails()" [matTooltip]="'See auction details'">
   <mat-card-header>
     <img mat-card-avatar alt=""
-         [ngSrc]="userAvatar || '/default-avatar.png'"
-         [width]="auctionCardAvatarW" [height]="auctionCardAvatarH"/>
-    <mat-card-title>{{ userName }}</mat-card-title>
+         [ngSrc]="auctionCreator.userAvatar || '/default-avatar.png'"
+         [width]="auctionCardAvatarW" [height]="auctionCardAvatarH" [routerLink]="['/profile', auctionCreator.id]"
+         class="auction-card-avatar"/>
+
+    <mat-card-title [routerLink]="['/profile', auctionCreator.id]"
+                    [matTooltip]="'See user profile of ' + auctionCreator.firstName + ' ' +  auctionCreator.lastName ">
+      {{ auctionCreator.firstName }} {{ auctionCreator.lastName }}
+    </mat-card-title>
     <mat-card-subtitle>{{ getFormattedDate() }}</mat-card-subtitle>
   </mat-card-header>
 
-  <img class="auction-card-img" mat-card-image [ngSrc]="imgSrc" [width]="auctionCardImgW" [height]="auctionCardImgH"
-       alt="Photo of a Shiba Inu"/>
   <mat-card-content>
-    <p>{{ description }}</p>
+    <img class="auction-card-img" mat-card-image [ngSrc]="auction.imgSrc || '/placeholder-image.jpg'"
+         [width]="auctionCardImgW"
+         [height]="auctionCardImgH"
+         alt="Photo could not be loaded"/>
+    <h3>{{ auction.title }}</h3>
+    <p>{{ auction.description }}</p>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button [routerLink]="['/auction', auctionID]">See more..</button>
-  </mat-card-actions>
 </mat-card>

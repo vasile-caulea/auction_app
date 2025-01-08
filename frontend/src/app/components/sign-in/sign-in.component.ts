@@ -1,31 +1,34 @@
-import {Component} from "@angular/core";
+import {ChangeDetectionStrategy, Component, signal} from "@angular/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {MatButton} from "@angular/material/button";
-import {MatCard, MatCardContent} from "@angular/material/card";
+import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
+import {MatCard, MatCardContent, MatCardModule} from "@angular/material/card";
 import {RouterLink} from "@angular/router";
+import {AuthService} from '../../services/auth.service';
+import {MatIcon, MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-sign-in',
   imports: [
     ReactiveFormsModule,
-    MatFormField,
-    MatInput,
-    MatButton,
-    MatCard,
-    MatCardContent,
-    MatLabel,
-    RouterLink
+    RouterLink,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatInput
   ],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class SignInComponent {
   loginForm: FormGroup;
+  hide = signal(true);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -34,9 +37,21 @@ export class SignInComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
     } else {
       console.log('Form is invalid');
     }
+  }
+
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 }

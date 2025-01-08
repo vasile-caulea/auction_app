@@ -1,14 +1,12 @@
 <div class="auction-list">
   <app-auction-card
-    *ngFor="let auction of auctions"
-    [imgSrc]="auction.imgSrc"
-    [description]="auction.description"
-    [auctionID]="auction.id"
-    [userAvatar]="auction.userAvatar"
-    [userName]="auction.userName"
+    *ngFor="let auction of auctions; let i = index;"
+    [auction]="auctions[i]"
+    [auctionCreator]="auctionsCreators[i]"
   ></app-auction-card>
 </div>
 
 <mat-paginator
-  [length]="paginatorLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+  [length]="paginatorLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+  (page)="pageChange.emit($event)">
 </mat-paginator>

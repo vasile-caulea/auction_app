@@ -1,1 +1,8 @@
-<app-auction-list [auctions]="auctions"></app-auction-list>
+<div class="home-container">
+  <app-auction-list
+    [auctions]="auctionsObjects.auctions"
+    [auctionsCreators]="auctionsObjects.auctionCreators"
+    [numberOfAuctions]="numberOfAuctions"
+    (pageChange)="onPageChange($event)">>
+  </app-auction-list>
+</div>

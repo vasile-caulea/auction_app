@@ -8,9 +8,14 @@
 
 mat-sidenav-content {
   width: auto;
-  min-height: 200px;
+  min-height: 90vh;
+  overflow: visible;
 }
 
 .active {
   background-color: #e0e0e0;
+}
+
+.content-padding {
+  padding: 1em;
 }

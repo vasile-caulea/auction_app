@@ -1,1 +1,19 @@
-<p>auction-details works!</p>
+<div class="auction-details-container">
+
+
+  <div class="auction-details">
+    <div class="auction-details-info">
+      <h2>{{ this.auction.title }}</h2>
+      <p>{{ this.auction.description }}</p>
+    </div>
+    <div>
+      <img [src]="this.auction.imgSrc || 'placeholder-image.jpg'" alt="Auction Image" class="auction-details-img">
+    </div>
+  </div>
+
+  <div class="auction-objects">
+    <app-auction-object-card *ngFor="let object of this.auctionObjects"
+                             [auctionObject]="object"></app-auction-object-card>
+  </div>
+
+</div>

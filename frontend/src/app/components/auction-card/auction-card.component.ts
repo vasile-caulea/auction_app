@@ -1,15 +1,18 @@
 import {Component, Input} from '@angular/core';
 import {
   MatCard,
-  MatCardActions, MatCardAvatar,
+  MatCardAvatar,
   MatCardContent,
   MatCardHeader,
   MatCardImage, MatCardSubtitle,
   MatCardTitle
 } from '@angular/material/card';
-import {MatButton} from '@angular/material/button';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
+import {AuctionInterface} from '../../interfaces/auction.interface';
+import {AuctionCreatorInterface} from '../../interfaces/auction-creator.interface';
+import {AuctionDataService} from '../../passing-data-services/auction-data.service';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-auction-card',
@@ -17,29 +20,32 @@ import {NgOptimizedImage} from '@angular/common';
     MatCard,
     MatCardContent,
     MatCardImage,
-    MatButton,
-    MatCardActions,
     RouterLink,
     MatCardHeader,
     MatCardTitle,
     MatCardSubtitle,
     MatCardAvatar,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatTooltip
   ],
   templateUrl: './auction-card.component.html',
   styleUrl: './auction-card.component.css'
 })
 export class AuctionCardComponent {
 
-  @Input() imgSrc: string = '';
-  @Input() description: string = '';
-  @Input() auctionID!: number;
-  @Input() postDate: Date = new Date();
-  @Input() userAvatar: string = '';
-  @Input() userName: string = '';
+  @Input() auction!: AuctionInterface;
+  @Input() auctionCreator!: AuctionCreatorInterface;
+
+  constructor(private router: Router, private passDataService: AuctionDataService) {
+  }
+
+  goToDetails() {
+    this.passDataService.setAuctionData(this.auction, this.auctionCreator);
+    this.router.navigate(['/auction']);
+  }
 
   getFormattedDate(): string {
-    return this.postDate.toLocaleString('ro-RO', {timeZone: 'EET'});
+    return this.auction.createdAt.toLocaleString('ro-RO', {timeZone: 'EET'});
   }
 
   auctionCardImgW: number = 300;

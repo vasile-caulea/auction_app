@@ -1,6 +1,9 @@
-import {Component} from '@angular/core';
-import {AuctionCardComponent} from '../auction-card/auction-card.component';
+import {Component, OnInit} from '@angular/core';
 import {AuctionListComponent} from '../auction-list/auction-list.component';
+import {AuctionInterface} from '../../interfaces/auction.interface';
+import {AuctionCreatorInterface} from '../../interfaces/auction-creator.interface';
+import {AuctionService} from '../../services/auction.service';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
@@ -10,50 +13,50 @@ import {AuctionListComponent} from '../auction-list/auction-list.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  auctions = [
-    {
-      imgSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      description: 'This is a description',
-      id: 1,
-      userAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      userName: 'Shiba Inu'
-    },
-    {
-      imgSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      description: 'This is a description',
-      id: 2,
-      userAvatar: '',
-      userName: 'Caule'
-    },
-    {
-      imgSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      description: 'This is a description',
-      id: 1,
-      userAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      userName: 'Shiba Inu'
-    },
-    {
-      imgSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      description: 'This is a description',
-      id: 2,
-      userAvatar: '',
-      userName: 'Caule'
-    },
-    {
-      imgSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      description: 'This is a description',
-      id: 1,
-      userAvatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      userName: 'Shiba Inu'
-    },
-    {
-      imgSrc: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-      description: 'This is a description',
-      id: 2,
-      userAvatar: '',
-      userName: 'Caule'
-    },
-  ];
+  auctionsObjects = {
+    auctions: Array<AuctionInterface>(),
+    auctionCreators: Array<AuctionCreatorInterface>(),
+  };
+
+  numberOfAuctions: number = 0;
+  pageSize: number = 10;
+
+  constructor(private auctionService: AuctionService) {
+  }
+
+  async ngOnInit() {
+    this.auctionService.getNumberOfAuctions().subscribe({
+      next: (response: any) => {
+        this.numberOfAuctions = response.count;
+        this.auctionService.getAuctionsPageable(0, this.pageSize).subscribe({
+          next: (response) => {
+            this.auctionsObjects = this.auctionService.getAuctionsObjectFromResult(response);
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  onPageChange(event: PageEvent) {
+    console.log(event);
+    let page = event.pageIndex;
+    this.pageSize = event.pageSize;
+
+    this.auctionService.getAuctionsPageable(page, this.pageSize).subscribe({
+      next: (response) => {
+        this.auctionsObjects = this.auctionService.getAuctionsObjectFromResult(response);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
 }

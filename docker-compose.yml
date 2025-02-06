@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  charity-app-db:
+    image: mongo:latest
+    container_name: charity-app-db
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: chAppUser
+      MONGODB_INITDB_ROOT_PASSWORD: cD/UG,mxNWk'K=jPs?^]ug*5@L+qM_68Q-7z.
+    ports:
+      - "27017:27017"

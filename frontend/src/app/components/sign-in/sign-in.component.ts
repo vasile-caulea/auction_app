@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component, signal} from "@angular/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
-import {MatCard, MatCardContent, MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
 import {RouterLink} from "@angular/router";
 import {AuthService} from '../../services/auth.service';
-import {MatIcon, MatIconModule} from '@angular/material/icon';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-sign-in',

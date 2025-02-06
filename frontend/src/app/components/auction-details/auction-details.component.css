@@ -25,6 +25,7 @@
 .auction-objects {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .auction-details-info {

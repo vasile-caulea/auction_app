@@ -24,7 +24,6 @@ export class NavbarComponent implements OnInit {
 
   links = [
     {name: 'Home', route: '/home'},
-    {name: 'My Auctions', route: '/auctions'}
   ];
 
   constructor(private utils: UtilsService) {

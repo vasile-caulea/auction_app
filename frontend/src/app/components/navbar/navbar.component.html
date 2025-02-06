@@ -8,6 +8,8 @@
   <mat-nav-list>
     <a class="menu-link" mat-list-item [routerLink]="link.route" *ngFor="let link of links">{{ link.name }}</a>
 
+    <a *ngIf="isLoggedIn"  class="menu-link" mat-list-item [routerLink]="'/auctions'">My Auctions</a>
+
     <a *ngIf="!isLoggedIn" class="menu-link-icon" mat-list-item [routerLink]="'sign-in'">
       <mat-icon class="login" inline="true">login</mat-icon>
     </a>

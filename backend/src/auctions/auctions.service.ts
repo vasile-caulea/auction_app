@@ -19,9 +19,8 @@ export class AuctionsService {
         return this.auctionModel.find().populate('createdBy', 'firstName lastName').exec();
     }
 
-
     async getAllPaged(page: number, size: number) {
-        return this.auctionModel.find().skip(page * size).limit(size).populate('createdBy', 'firstName lastName').exec();
+        return this.auctionModel.find().sort({'createdAt': -1}).skip(page * size).limit(size).populate('createdBy', 'firstName lastName').exec();
     }
 
     async getAuctionsCount() {

@@ -1,11 +1,14 @@
 
-# Demo Web Application - Charity Auctions App
+# Charity Auctions App - Demo Web Application
 
 ## Description
 This project is a demo web application that implements functionality for a charity auctions web application. It has the following components:
 
 - **Backend**: Implemented with NestJS, provides APIs for auctions and users.
 - **Frontend**: Developed with Angular, offers a user interface to interact with auctions and user profiles.
+
+## Structure
+![auction_app](https://github.com/user-attachments/assets/1ebc0b98-f019-4c14-b4f4-9db6f0b45684)
 
 ## Installation
 
